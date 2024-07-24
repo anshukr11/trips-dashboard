@@ -31,7 +31,7 @@ export default function TripsTable({ trips, selectedStatus, onEditTrip }: TripsT
       if (a[orderBy] < b[orderBy]) return isAsc ? -1 : 1;
       if (a[orderBy] > b[orderBy]) return isAsc ? 1 : -1;
       return 0;
-    });
+  });
 
   return (
     <TableContainer component={Paper}>

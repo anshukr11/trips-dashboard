@@ -24,6 +24,7 @@ export default function handler(req, res) {
     const index = data.data.findIndex(trip => trip._id === updatedTrip._id)
     if (index !== -1) {
       data.data[index] = updatedTrip
+      console.log('Updated data:', data.data)
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2))
       res.status(200).json({ message: 'Trip updated successfully' })
     } else {

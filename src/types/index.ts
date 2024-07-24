@@ -7,8 +7,8 @@ export interface Trip {
     currentStatus: 'Booked' | 'In Transit' | 'Reached Destination' | 'Delivered' | 'Delayed';
     currentStatusCode: string;
     tripStartTime: string;
-    tripEndTime: string;
-    lastPingTime: string;
+    tripEndTime: any;
+    lastPingTime: any;
     phoneNumber?: string;
     etaDays: number;
     tatStatus?: 'Ontime' | 'Delayed' | 'Others';

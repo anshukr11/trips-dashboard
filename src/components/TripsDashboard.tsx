@@ -1,5 +1,6 @@
 import { Counters, Trip } from '@/types';
-import { Box, Button, Container, Grid, Paper, Typography } from '@mui/material';
+import { calculatePercentage } from '@/utils/helpers';
+import { Box, Button, Container, Grid, Paper } from '@mui/material';
 import { styled } from '@mui/system';
 import { useEffect, useState } from 'react';
 import { AddTripForm } from './AddTripForm';
@@ -106,42 +107,48 @@ export default function TripsDashboard() {
     setOpenStatusUpdate(true)
   }
 
-  console.log(selectedTrip, 'selectedTrip')
-
   return (
     <Container maxWidth="lg">
-        <Typography variant="h4" component="h1" gutterBottom>
-        Trips Dashboard
-        </Typography>
-        <Grid container spacing={3}>
-        <Grid item xs={12} md={3}>
-            <StatusCounter
-                label="Total Trips" 
-                count={counters.total} 
-                onClick={() => setSelectedStatus(null)} 
-            />
-        </Grid>
-        <Grid item xs={12} md={3}>
-            <StatusCounter 
-            label="Delivered" 
-            count={counters.delivered} 
-            onClick={() => setSelectedStatus('Delivered')} 
-            />
-        </Grid>
-        <Grid item xs={12} md={3}>
-            <StatusCounter 
-            label="In Transit" 
-            count={counters.inTransit} 
-            onClick={() => setSelectedStatus('In Transit')} 
-            />
-        </Grid>
-        <Grid item xs={12} md={3}>
-            <StatusCounter 
-            label="Delayed" 
-            count={counters.delayed} 
-            onClick={() => setSelectedStatus('Delayed')} 
-            />
-        </Grid>
+        <Grid container spacing={3} mt={4}>    
+            <Grid item xs={12} md={3}>
+                <StatusCounter
+                    label="Total Trips" 
+                    count={counters.total} 
+                    onClick={() => setSelectedStatus(null)} 
+                />
+            </Grid>
+            <Grid item xs={12} md={3}>
+                <StatusCounter 
+                    label="Delivered" 
+                    count={counters.delivered} 
+                    onClick={() => setSelectedStatus('Delivered')} 
+                />
+            </Grid>
+            <Grid item xs={12} md={2}>
+                <StatusCounter 
+                    label="Delayed" 
+                    count={counters.delayed} 
+                    onClick={() => setSelectedStatus('Delayed')} 
+                    styles={{ backgroundColor: '#feefef', color: '#CC3333', borderRight: '1px solid #CC3333', marginRight: '-1.5rem' }}
+                />
+            </Grid>
+            <Grid item xs={12} md={2}  sx={{ paddingLeft: 0}}>
+                <StatusCounter 
+                    label="In Transit" 
+                    count={counters.inTransit} 
+                    onClick={() => setSelectedStatus('In Transit')} 
+                    styles={{ marginRight: '-1.5rem' }}
+                    percentCompleted={calculatePercentage(counters.inTransit, counters.total)}
+                />
+            </Grid>
+            <Grid item xs={12} md={2} sx={{ paddingLeft: 0}}>
+                <StatusCounter 
+                    label="Delivered" 
+                    count={counters.delayed} 
+                    onClick={() => setSelectedStatus('Delivered')} 
+                    percentCompleted={calculatePercentage(counters.delivered, counters.total)}
+                />
+            </Grid>
         </Grid>
 
         <StyledPaper>
