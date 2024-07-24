@@ -216,16 +216,6 @@
       "destLatitude": 8.5241,
       "destLongitude": 76.9366,
       "createdAt": "2024-02-14T23:00:00Z"
-    },
-    {
-      "tripId": "sdf",
-      "transporter": "DTDC",
-      "source": "dsaf",
-      "dest": "dasf",
-      "currentStatus": "Booked",
-      "etaDays": 0,
-      "_id": "",
-      "phoneNumber": "324"
     }
   ]
 }

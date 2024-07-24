@@ -2,7 +2,7 @@ import { Counters, Trip } from '@/types';
 import { calculatePercentage } from '@/utils/helpers';
 import { Box, Button, Container, Grid, Paper } from '@mui/material';
 import { styled } from '@mui/system';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AddTripForm } from './AddTripForm';
 import { EditTripForm } from './EditTripForm';
 import StatusCounter from './StatusContainer';
@@ -107,15 +107,15 @@ export default function TripsDashboard() {
     setOpenStatusUpdate(true)
   }
 
-  return (
-    <Container maxWidth="lg">
-        <Grid container spacing={3} mt={4}>    
+  const renderStatusContainer = () => {
+    return (
+        <React.Fragment>
             <Grid item xs={12} md={3}>
-                <StatusCounter
-                    label="Total Trips" 
-                    count={counters.total} 
-                    onClick={() => setSelectedStatus(null)} 
-                />
+            <StatusCounter
+                label="Total Trips" 
+                count={counters.total} 
+                onClick={() => setSelectedStatus(null)} 
+            />
             </Grid>
             <Grid item xs={12} md={3}>
                 <StatusCounter 
@@ -149,6 +149,16 @@ export default function TripsDashboard() {
                     percentCompleted={calculatePercentage(counters.delivered, counters.total)}
                 />
             </Grid>
+        </React.Fragment>
+    )
+  }
+
+  debugger
+
+  return (
+    <Container maxWidth="lg">
+        <Grid container spacing={3} mt={4}>    
+            {renderStatusContainer()}
         </Grid>
 
         <StyledPaper>

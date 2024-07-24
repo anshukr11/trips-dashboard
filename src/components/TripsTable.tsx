@@ -2,7 +2,8 @@ import {
   Checkbox,
   Paper,
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
-  TableSortLabel
+  TableSortLabel,
+  Typography
 } from '@mui/material';
 import { useState } from 'react';
 import { Trip } from '../types';
@@ -33,9 +34,61 @@ export default function TripsTable({ trips, selectedStatus, onEditTrip }: TripsT
       return 0;
   });
 
+  const getStyles = (currStatus: any) => {
+    const commonStyles = {
+      width: 'fit-content',
+      padding: '2px 12px',
+      borderRadius: '4px',
+    }
+
+    if(currStatus === 'Delivered') {
+      return {
+        ...commonStyles,
+        backgroundColor: '#fff4e8',
+        color: '#FE9023'
+      }
+    } 
+
+    if(currStatus === 'Delayed') {
+      return {
+        ...commonStyles,
+        backgroundColor: '#feefef',
+        color: '#CC3333'
+      }
+    }
+
+    if(currStatus === 'Ontime') {
+      return {
+        ...commonStyles,
+        backgroundColor: '#e7f4ef',
+        color: '#038700'
+      }
+    }
+
+    if(currStatus === 'Others') {
+      return {
+        ...commonStyles,
+        backgroundColor: '#eaeaea',
+        color: '#313131'
+      }
+    }
+
+    return {
+      ...commonStyles,
+      backgroundColor: '#ebf3fe',
+      color: '#3388EB'
+    }
+  }
+
   return (
     <TableContainer component={Paper}>
-      <Table>
+      <Table
+        sx={{
+          '& .MuiTableCell-root': {
+            fontSize: '12px', 
+          },
+        }}
+      >
         <TableHead>
         <TableRow>
             <TableCell> 
@@ -47,7 +100,7 @@ export default function TripsTable({ trips, selectedStatus, onEditTrip }: TripsT
                 direction={orderBy === 'tripId' ? order : 'asc'}
                 onClick={() => handleRequestSort('tripId')}
               >
-                Trip ID
+                <Typography color={'#313131'}> Trip ID</Typography>
               </TableSortLabel>
             </TableCell>
             <TableCell>
@@ -56,7 +109,7 @@ export default function TripsTable({ trips, selectedStatus, onEditTrip }: TripsT
                 direction={orderBy === 'transporter' ? order : 'asc'}
                 onClick={() => handleRequestSort('transporter')}
               >
-                Transporter
+                <Typography color={'#313131'}>Transporter</Typography>
               </TableSortLabel>
             </TableCell>
             <TableCell>
@@ -65,7 +118,7 @@ export default function TripsTable({ trips, selectedStatus, onEditTrip }: TripsT
                 direction={orderBy === 'source' ? order : 'asc'}
                 onClick={() => handleRequestSort('source')}
               >
-                Source
+                <Typography color={'#313131'}>Source</Typography>
               </TableSortLabel>
             </TableCell>
             <TableCell>
@@ -74,7 +127,8 @@ export default function TripsTable({ trips, selectedStatus, onEditTrip }: TripsT
                 direction={orderBy === 'dest' ? order : 'asc'}
                 onClick={() => handleRequestSort('dest')}
               >
-                Destination
+                <Typography color={'#313131'}>Destination</Typography>
+                <img src='filters.svg'  alt='filter' />
               </TableSortLabel>
             </TableCell>
             <TableCell>
@@ -83,7 +137,8 @@ export default function TripsTable({ trips, selectedStatus, onEditTrip }: TripsT
                 direction={orderBy === 'currentStatus' ? order : 'asc'}
                 onClick={() => handleRequestSort('currentStatus')}
               >
-                Status
+                <Typography color={'#313131'}>Status</Typography>
+                <img src='filters.svg'  alt='filter' />
               </TableSortLabel>
             </TableCell>
             <TableCell>
@@ -92,7 +147,8 @@ export default function TripsTable({ trips, selectedStatus, onEditTrip }: TripsT
                 direction={orderBy === 'tatStatus' ? order : 'asc'}
                 onClick={() => handleRequestSort('tatStatus')}
               >
-                TAT Status
+                <Typography color={'#313131'}>TAT Status</Typography>
+                <img src='filters.svg'  alt='filter' />
               </TableSortLabel>
             </TableCell>
           </TableRow>
@@ -113,8 +169,8 @@ export default function TripsTable({ trips, selectedStatus, onEditTrip }: TripsT
               <TableCell>{trip.transporter}</TableCell>
               <TableCell>{trip.source}</TableCell>
               <TableCell>{trip.dest}</TableCell>
-              <TableCell>{trip.currentStatus}</TableCell>
-              <TableCell>{trip.tatStatus}</TableCell>
+              <TableCell><Typography style={getStyles(trip.currentStatus)} fontSize={'12px'}>{trip.currentStatus}</Typography></TableCell>
+              <TableCell><Typography style={getStyles(trip.tatStatus)} fontSize={'12px'}>{trip.tatStatus}</Typography></TableCell>
             </TableRow>
           ))}
         </TableBody>
