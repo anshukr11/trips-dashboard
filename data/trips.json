@@ -207,6 +207,14 @@
       "dest": "Kolkata",
       "currentStatus": "In Transit",
       "etaDays": "10"
+    },
+    {
+      "tripId": "",
+      "transporter": "",
+      "source": "",
+      "dest": "",
+      "currentStatus": "Booked",
+      "etaDays": 0
     }
   ]
 }

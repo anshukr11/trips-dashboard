@@ -19,7 +19,7 @@ interface StatusCounterProps {
 
 export default function StatusCounter({ label, count, onClick }: StatusCounterProps) {
   return (
-    <StyledPaper onClick={onClick}>
+    <StyledPaper onClick={onClick} className=''>
       <Typography variant="h6" component="div">
         {label}
       </Typography>

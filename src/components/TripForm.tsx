@@ -1,4 +1,5 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, TextField } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, TextField } from '@mui/material';
+import { DatePicker } from '@mui/x-date-pickers';
 import React, { useEffect, useState } from 'react';
 import { Trip } from '../types';
 import Dropdown from './common/Dropdown/Dropdown';
@@ -47,12 +48,10 @@ export default function TripForm({ open, onClose, onSubmit, initialData = null, 
     }
   };
 
-  return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>{isEdit ? 'Edit Trip' : 'Add New Trip'}</DialogTitle>
-      <form onSubmit={handleSubmit}>
-      <DialogContent>
-          <TextField
+  const RenderAddForm = () => {
+    return (
+      <React.Fragment>
+                  <TextField
             sx={{ width: '47%', marginRight: '8px', borderRadius: '8px'}}
             name="tripId"
             label="Trip ID"
@@ -93,21 +92,46 @@ export default function TripForm({ open, onClose, onSubmit, initialData = null, 
             value={formData.phoneNumber}
             onChange={handleChange}
           />
+      </React.Fragment>
+    )
+  }
 
-          {/* <TextField
-            name="etaDays"
-            label="ETA (Days)"
-            type="number"
-            fullWidth
-            margin="normal"
-            value={formData.etaDays}
+  const RenderEditForm = () => {
+    return (
+      <React.Fragment>
+          <Dropdown
+            sx={{ width: '100%' }}
+            label="Transporter"
+            name="transporter"
+            value={formData.transporter}
             onChange={handleChange}
-          /> */}
+          />
+        
+        <Box mt={2}>
+          <DatePicker label="Time" sx={{ width: '100%'}} />
+        </Box>
+      </React.Fragment>
+    )
+  }
+
+  return (
+    <Dialog open={open} onClose={onClose} fullWidth>
+      <DialogTitle>{isEdit ? 'Update Status' : 'Add New Trip'}</DialogTitle>
+      <form onSubmit={handleSubmit}>
+        <DialogContent>
+          {isEdit ? <RenderEditForm /> : <RenderAddForm />}
         </DialogContent>
 
         <Divider />
+
         <DialogActions sx={{ margin: '8px'}}>
-          <Button onClick={onClose} variant="outlined">Cancel</Button>
+          <Button 
+            onClick={onClose} 
+            variant="outlined"
+            color='secondary' 
+            sx={{ color: '#313131', width: '120px'}}>
+          Cancel</Button>
+
           <Button type="submit" variant="contained">
             {isEdit ? 'Update Status' : 'Add Trip'}
           </Button>

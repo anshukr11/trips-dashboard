@@ -1,5 +1,5 @@
 import { Counters, Trip } from '@/types';
-import { Button, Container, Grid, Paper, Typography } from '@mui/material';
+import { Box, Button, Container, Grid, Paper, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import { useEffect, useState } from 'react';
 import { AddTripForm } from './AddTripForm';
@@ -13,6 +13,7 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   height: '100%',
+  marginTop: '1rem'
 }));
 
 export default function TripsDashboard() {
@@ -25,7 +26,7 @@ export default function TripsDashboard() {
   });
   const [selectedStatus, setSelectedStatus] = useState<Trip['currentStatus'] | null>('Delivered');
   const [isAddFormOpen, setIsAddFormOpen] = useState(false);
-  const [isEditFormOpen, setIsEditFormOpen] = useState(false);
+  const [openStatusUpdate, setOpenStatusUpdate] = useState(false);
   const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
 
   useEffect(() => {
@@ -90,7 +91,7 @@ export default function TripsDashboard() {
     });
     if (response.ok) {
       fetchTrips();
-      setIsEditFormOpen(false);
+      setOpenStatusUpdate(false)
       setSelectedTrip(null);
     } else {
       console.error('Failed to update trip');
@@ -100,6 +101,12 @@ export default function TripsDashboard() {
   const onAddTrip = () => {
     setIsAddFormOpen(true)
   }
+
+  const onStatusUpdate = () => {
+    setOpenStatusUpdate(true)
+  }
+
+  console.log(selectedTrip, 'selectedTrip')
 
   return (
     <Container maxWidth="lg">
@@ -137,17 +144,30 @@ export default function TripsDashboard() {
         </Grid>
         </Grid>
 
-        <Button variant="contained" onClick={onAddTrip}>Add Trip</Button>
-
         <StyledPaper>
-        <TripsTable
-            trips={trips} 
-            selectedStatus={selectedStatus}
-            onEditTrip={(trip) => {
-            setSelectedTrip(trip);
-            setIsEditFormOpen(true);
-            }}
-        />
+            <Box m={2} mr={0} display={'flex'} justifyContent={'flex-end'} >
+                <Button 
+                    variant="outlined"  
+                    color='secondary' 
+                    onClick={onStatusUpdate} 
+                    disabled={!selectedTrip}
+                    sx={{ color: '#313131', marginRight: 2}}
+                >Update Status</Button>
+
+                <Button 
+                    variant="contained" 
+                    onClick={onAddTrip} 
+                    sx={{ minWidth: 120}}
+                >Add Trip</Button>
+            </Box>
+
+            <TripsTable
+                trips={trips} 
+                selectedStatus={selectedStatus}
+                onEditTrip={(checkedTrip) => {
+                    setSelectedTrip(selectedTrip?._id == checkedTrip._id ? null : checkedTrip)
+                }}
+            />
         </StyledPaper>
 
         <AddTripForm
@@ -155,11 +175,12 @@ export default function TripsDashboard() {
             onClose={() => setIsAddFormOpen(false)} 
             onAddTrip={handleAddTrip} 
         />
+
         <EditTripForm
-        open={isEditFormOpen} 
-        onClose={() => setIsEditFormOpen(false)} 
-        onEditTrip={handleEditTrip}
-        trip={selectedTrip}
+            open={openStatusUpdate} 
+            onClose={() => setOpenStatusUpdate(false)} 
+            onEditTrip={handleEditTrip}
+            trip={selectedTrip}
         />
   </Container>
   );

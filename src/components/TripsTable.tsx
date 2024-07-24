@@ -1,7 +1,8 @@
 import {
-    Paper,
-    Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
-    TableSortLabel
+  Checkbox,
+  Paper,
+  Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
+  TableSortLabel
 } from '@mui/material';
 import { useState } from 'react';
 import { Trip } from '../types';
@@ -17,7 +18,7 @@ type OrderBy = keyof Trip;
 export default function TripsTable({ trips, selectedStatus, onEditTrip }: TripsTableProps) {
   const [orderBy, setOrderBy] = useState<OrderBy>('tripStartTime');
   const [order, setOrder] = useState<'asc' | 'desc'>('desc');
-
+  const [selectedIdx, setSelectedIdx] = useState('')
   const handleRequestSort = (property: OrderBy) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -37,6 +38,9 @@ export default function TripsTable({ trips, selectedStatus, onEditTrip }: TripsT
       <Table>
         <TableHead>
         <TableRow>
+            <TableCell> 
+                <Checkbox />
+            </TableCell>
             <TableCell>
               <TableSortLabel
                 active={orderBy === 'tripId'}
@@ -91,21 +95,26 @@ export default function TripsTable({ trips, selectedStatus, onEditTrip }: TripsT
                 TAT Status
               </TableSortLabel>
             </TableCell>
-            <TableCell>Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {sortedTrips.map((trip) => (
             <TableRow key={trip._id}>
+             <TableCell>
+                <Checkbox 
+                  onChange={() => {
+                    setSelectedIdx(selectedIdx == trip._id ? '' : trip._id)
+                    onEditTrip(trip)
+                  }} 
+                  checked={selectedIdx === trip._id} 
+                />
+              </TableCell>
               <TableCell>{trip.tripId}</TableCell>
               <TableCell>{trip.transporter}</TableCell>
               <TableCell>{trip.source}</TableCell>
               <TableCell>{trip.dest}</TableCell>
               <TableCell>{trip.currentStatus}</TableCell>
               <TableCell>{trip.tatStatus}</TableCell>
-              <TableCell>
-                <button onClick={() => onEditTrip(trip)}>Edit</button>
-              </TableCell>
             </TableRow>
           ))}
         </TableBody>
