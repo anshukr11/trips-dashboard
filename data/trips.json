@@ -86,11 +86,11 @@
       "transporter": "Bluedart",
       "tripStartTime": "2024-02-09T12:38:54Z",
       "currentStatusCode": "BKD",
-      "currentStatus": "Booked",
+      "currentStatus": "In Transit",
       "phoneNumber": 9695946228,
       "etaDays": 3,
       "distanceRemaining": 1973,
-      "tripEndTime": "",
+      "tripEndTime": "2024-07-26T18:30:00.000Z",
       "source": "Ghaziabad",
       "sourceLatitude": 9.4,
       "sourceLongitude": 72.3,
@@ -98,7 +98,8 @@
       "destLatitude": 15.1,
       "destLongitude": 81.9,
       "lastPingTime": "2024-02-15T12:38:54.000Z",
-      "createdAt": "2024-02-06T12:38:54.000Z"
+      "createdAt": "2024-02-06T12:38:54.000Z",
+      "tatStatus": "Delayed"
     },
     {
       "_id": "65d5ebad48b83b96d3ff0632",
@@ -146,20 +147,20 @@
       "transporter": "Bluedart",
       "tripStartTime": "2024-02-08T09:36:34Z",
       "currentStatusCode": "DEL",
-      "currentStatus": "In Transit",
+      "currentStatus": "Reached Destination",
       "phoneNumber": 9709959164,
       "etaDays": 3,
       "distanceRemaining": 0,
-      "tripEndTime": "2024-07-29T18:30:00.000Z",
+      "tripEndTime": "2024-07-30T18:30:00.000Z",
       "source": "Jabalpur",
       "sourceLatitude": 19.6,
       "sourceLongitude": 73,
       "dest": "Kota",
       "destLatitude": 17.3,
       "destLongitude": 70.9,
-      "lastPingTime": "2024-07-29T18:30:00.000Z",
+      "lastPingTime": "2024-07-30T18:30:00.000Z",
       "createdAt": "2024-02-08T09:36:34.000Z",
-      "tatStatus": "Ontime"
+      "tatStatus": "Delayed"
     },
     {
       "_id": "65d5ebad410c8fa31d181028",
@@ -247,7 +248,7 @@
       "transporter": "Gati",
       "tripStartTime": "2024-02-19T04:28:33Z",
       "currentStatusCode": "BKD",
-      "currentStatus": "Booked",
+      "currentStatus": "Delayed",
       "phoneNumber": 8152767988,
       "etaDays": 4,
       "distanceRemaining": 116,
@@ -259,7 +260,8 @@
       "destLatitude": 14.4,
       "destLongitude": 96.6,
       "lastPingTime": "2024-02-20T04:28:33.000Z",
-      "createdAt": "2024-02-14T04:28:33.000Z"
+      "createdAt": "2024-02-14T04:28:33.000Z",
+      "tatStatus": "Ontime"
     },
     {
       "_id": "65d5ebad0cb10cf18d5744bb",
@@ -327,7 +329,7 @@
       "transporter": "FedEx",
       "tripStartTime": "2024-02-20T05:29:49Z",
       "currentStatusCode": "RD",
-      "currentStatus": "Reached Destination",
+      "currentStatus": "In Transit",
       "phoneNumber": 8832577812,
       "etaDays": 1,
       "distanceRemaining": 971,
@@ -339,7 +341,8 @@
       "destLatitude": 29.2,
       "destLongitude": 68.9,
       "lastPingTime": "2024-02-23T05:29:49.000Z",
-      "createdAt": "2024-02-17T05:29:49.000Z"
+      "createdAt": "2024-02-17T05:29:49.000Z",
+      "tatStatus": "Delayed"
     },
     {
       "_id": "65d5ebad355704792a4d1163",

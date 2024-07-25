@@ -269,7 +269,7 @@ export default function TripsTable({
 
   useEffect(() => {
     populateTrips()
-  }, [selectedStatus, page])
+  }, [selectedStatus, page, order, orderBy, trips])
 
   const populateTrips = () => {
     const sortedTrips = trips
@@ -395,6 +395,7 @@ export default function TripsTable({
                   onClick={() => handleRequestSort('currentStatus')}
                 >
                   {renderColumns('Status')}
+                  <img src="filters.svg" alt="filter" />
                 </TableSortLabel>
               </TableCell>
               <TableCell sortDirection={orderBy === 'tatStatus' ? order : false}>
@@ -404,6 +405,7 @@ export default function TripsTable({
                   onClick={() => handleRequestSort('tatStatus')}
                 >
                   {renderColumns('TAT Status')}
+                  <img src="filters.svg" alt="filter" />
                 </TableSortLabel>
               </TableCell>
             </TableRow>

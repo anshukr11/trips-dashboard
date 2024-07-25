@@ -16,6 +16,7 @@ const initialFormState: TripFormData = {
   currentStatus: 'Booked',
   etaDays: 0,
   _id: '',
+  tripEndTime: ''
 };
 
 interface TripFormProps {

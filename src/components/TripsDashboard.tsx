@@ -230,6 +230,7 @@ import { Counters, Trip } from '@/types';
 import { calculatePercentage } from '@/utils/helpers';
 import { Box, Button, CircularProgress, Container, Grid, Paper } from '@mui/material';
 import { styled } from '@mui/system';
+import { toast } from 'material-react-toastify';
 import React, { useEffect, useState } from 'react';
 import { AddTripForm } from './AddTripForm';
 import { EditTripForm } from './EditTripForm';
@@ -310,6 +311,7 @@ export default function TripsDashboard() {
     if (response.ok) {
       fetchTrips(page, rowsPerPage);
       setIsAddFormOpen(false);
+      toast.dark('Trip added successfully')
     } else {
       console.error('Failed to add trip');
     }
@@ -327,6 +329,7 @@ export default function TripsDashboard() {
       fetchTrips(page, rowsPerPage);
       setOpenStatusUpdate(false);
       setSelectedTrip(null);
+      toast.dark('status updated successfully')
     } else {
       console.error('Failed to update trip');
     }
